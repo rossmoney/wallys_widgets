@@ -23,8 +23,11 @@
         },
         methods: {
             deletePackage(id) {
-                console.log(this.$parent.packages[id]);
-                this.$parent.packages[id].delete();
+                let apackage = this.$parent.packages.find(apackage => apackage.id === id);
+                apackage.delete();
+
+                let filteredPackages = this.$parent.packages.filter(element => element !== apackage)
+                this.$parent.packages = filteredPackages;
             }
         },
     }

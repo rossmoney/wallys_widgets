@@ -26,7 +26,6 @@ class Package
             let self = this;
 
             // Let the controller know that we want a JSON response.
-            // The Update Quote modal calls the same controller method but expects a different type of response. :(
             const config = {
                 headers: {
                     'Accept': 'application/json'
@@ -52,7 +51,6 @@ class Package
             let self = this;
 
             // Let the controller know that we want a JSON response.
-            // The Update Quote modal calls the same controller method but expects a different type of response. :(
             const config = {
                 headers: {
                     'Accept': 'application/json'
@@ -63,6 +61,7 @@ class Package
                 .then(function (response) {
                     Object.assign(self, response.data);
                 });
+
         }
     }
 

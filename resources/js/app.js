@@ -19,9 +19,8 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-//Vue.component('package-component', require('./components/PackagesComponent.vue').default);
-
-import Packages from "./components/PackagesComponent.vue";
+Vue.component('addpackages', require('./components/AddPackagesComponent.vue').default);
+Vue.component('packages', require('./components/PackagesComponent.vue').default);
 
 import Package from './classes/Package';
 
@@ -33,19 +32,12 @@ import Package from './classes/Package';
 
 const app = new Vue({
     el: '#app',
-    components: {
-        Packages,
-    },
-    methods: {
-
-    },
     props: {
         packages: Object,
     },
     created() {
         this.packages = [];
         packages.forEach((apackage) => {
-            console.log(apackage);
             this.packages.push(new Package(apackage));
         });
     }

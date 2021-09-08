@@ -28,7 +28,7 @@
               Add Package
             </div>
             <div class="card-body">
-            
+                <AddPackages></AddPackages>
             </div>
         </div>
     </div>
