@@ -7,8 +7,9 @@
             </div>
 
             <div class="input-group mb-3">
-                <span class="input-group-text" id="result">Result</span>
-                <textarea v-model="result" disabled readonly class="form-control"></textarea>
+                <span class="input-group-text" id="result">Packages Required</span>
+                <textarea v-if="result == ''" disabled readonly class="form-control">0</textarea>
+                <textarea v-for="(value, name) in result" disabled readonly class="form-control">{{ name }} x {{ value + '\n' }}</textarea>
             </div>
 
             <button v-on:click="calculate()" type="button" class="btn btn-primary float-right">Calculate Packages</button>
@@ -21,16 +22,24 @@
 
     export default {
         mounted() {
+            this.result = 0;
+            this.order_size = 0;
         },
-        props: {
-            order_size: null,
-            result: null,
+        data() {
+            return {
+                result: 0,
+                order_size: 0
+            };
         },
         methods: {
             calculate() {
                 if (this.order_size > 0)
                 {
-                    //add algorithm
+                    let self = this;
+                    axios.get('/packages/result/' + this.order_size)
+                        .then(function (response) {
+                            Object.assign(self, response.data);
+                        });
                 } else {
                     alert('Please enter an order size.');
                 }

@@ -8,9 +8,34 @@ use App\Models\Package;
 
 class PackageController extends Controller
 {
-    protected function calculatePackages()
+    public function result(int $orderSize)
     {
+        $remainingOrder = $orderSize;
+        $packages = Package::orderBy('size')->pluck('size')->toArray();
+        $packageCount = count($packages) - 1;
 
+        $numberPackagesPerSize = [];
+
+        while($remainingOrder > 0 && $packageCount > -1)
+        {
+            if ($packages[$packageCount] > $remainingOrder) 
+            {
+                $packageCount--;
+                continue;
+            }
+
+            if (!isset($numberPackagesPerSize[$packages[$packageCount]]))
+            {
+                $numberPackagesPerSize[$packages[$packageCount]] = 0;
+            }
+            $numberPackagesPerSize[$packages[$packageCount]] = $numberPackagesPerSize[$packages[$packageCount]] + 1;
+
+            $remainingOrder -= $packages[$packageCount];
+
+            $packageCount--;
+        }
+
+        return response()->json(['result' => $numberPackagesPerSize]);
     }
 
     public function index()

@@ -20,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('packages', PackageController::class);
+Route::get('/packages/result/{order_size}', [ PackageController::class, 'result']);

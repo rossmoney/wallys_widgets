@@ -17,8 +17,10 @@
     export default {
         mounted() {
         },
-        props: {
-            size: null,
+        data() {
+            return {
+                size: ''
+            };
         },
         methods: {
             addPackage() {
