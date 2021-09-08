@@ -19,8 +19,9 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('addpackages', require('./components/AddPackagesComponent.vue').default);
-Vue.component('packages', require('./components/PackagesComponent.vue').default);
+Vue.component('Addpackages', require('./components/AddPackagesComponent.vue').default);
+Vue.component('Packages', require('./components/PackagesComponent.vue').default);
+Vue.component('Calculatepackagesrequired', require('./components/CalculatePackagesRequiredComponent.vue').default);
 
 import Package from './classes/Package';
 

@@ -11,7 +11,7 @@
 
 @section("content")
 
-<div class="row">
+<div class="row mb-4">
     <div class="col">
         <div class="card">
             <div class="card-header">
@@ -33,5 +33,18 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                Results
+            </div>
+            <div class="card-body">
+                <CalculatePackagesRequired></CalculatePackagesRequired>
+            </div>
+        </div>
+    </div>
+</div> 
 
 @endsection
