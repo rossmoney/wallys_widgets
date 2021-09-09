@@ -18,19 +18,38 @@ class PackageController extends Controller
 
         while($remainingOrder > 0 && $packageCount > -1)
         {
+            if ($packageCount == 0)
+            {
+                if ($remainingOrder - $packages[$packageCount] > 0)
+                {
+                    $numberPackagesPerSize[$packages[$packageCount+1]] = ($numberPackagesPerSize[$packages[$packageCount+1]] ?? 0) + 1;
+                    //traverse up and add one to next largest package then end
+                }
+
+                if ($remainingOrder - $packages[$packageCount] <= 0)
+                {
+                    $numberPackagesPerSize[$packages[$packageCount]] = ($numberPackagesPerSize[$packages[$packageCount]] ?? 0) + 1;
+                }
+
+                break;
+            }
+
             if ($packages[$packageCount] > $remainingOrder) 
             {
                 $packageCount--;
                 continue;
             }
 
-            if (!isset($numberPackagesPerSize[$packages[$packageCount]]))
+            while($remainingOrder > 0)
             {
-                $numberPackagesPerSize[$packages[$packageCount]] = 0;
+                if ($remainingOrder - $packages[$packageCount] < 0)
+                {
+                    break;
+                }
+                
+                $remainingOrder -= $packages[$packageCount];
+                $numberPackagesPerSize[$packages[$packageCount]] = ($numberPackagesPerSize[$packages[$packageCount]] ?? 0) + 1;
             }
-            $numberPackagesPerSize[$packages[$packageCount]] = $numberPackagesPerSize[$packages[$packageCount]] + 1;
-
-            $remainingOrder -= $packages[$packageCount];
 
             $packageCount--;
         }

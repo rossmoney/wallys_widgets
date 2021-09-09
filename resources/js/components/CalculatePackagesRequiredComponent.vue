@@ -9,7 +9,7 @@
             <div class="input-group mb-3">
                 <span class="input-group-text" id="result">Packages Required</span>
                 <textarea v-if="result == ''" disabled readonly class="form-control">0</textarea>
-                <textarea v-for="(value, name) in result" disabled readonly class="form-control">{{ name }} x {{ value + '\n' }}</textarea>
+                <input type="text" v-if="value > 0" v-for="(value, name) in result" disabled readonly class="form-control" :value="name + ' x ' + value" />
             </div>
 
             <button v-on:click="calculate()" type="button" class="btn btn-primary float-right">Calculate Packages</button>
